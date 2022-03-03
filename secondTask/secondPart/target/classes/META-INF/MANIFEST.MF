@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1646323500930
+Build-Jdk-Spec: 17
+Bundle-Activator: hello.client.Client
+Bundle-ManifestVersion: 2
+Bundle-Name: helloClient
+Bundle-SymbolicName: hello.client
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin 5.1.4
+Export-Package: hello.client;uses:="org.osgi.framework";version="1.0.0.S
+ NAPSHOT"
+Import-Package: org.osgi.framework;version="[1.8,2)",hello.service;versi
+ on="[1.0,2)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=14))"
+Tool: Bnd-5.1.1.202006162103
