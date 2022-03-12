@@ -43,7 +43,6 @@
                             ${project.artifactId}
                         </Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
-                        <Bundle-Activator>${project.artifactId}.Activator</Bundle-Activator>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Import-Package>*</Import-Package>
                         <Export-Package>${project.artifactId}</Export-Package>

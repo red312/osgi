@@ -32,7 +32,7 @@
                         </Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Import-Package>org.osgi.framework</Import-Package>
+                        <Import-Package>org.osgi.framework, *</Import-Package>
                         <Export-Package>${project.artifactId}</Export-Package>
                     </instructions>
                 </configuration>
