@@ -13,14 +13,6 @@
     <name>serviceOSGI5</name>
     <packaging>bundle</packaging>
     <version>1.0.0</version>
-    <dependencies>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.core</artifactId>
-            <version>6.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
