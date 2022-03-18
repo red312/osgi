@@ -10,9 +10,12 @@ import ru.ifmo.dre.command.HelloCommand;
                 "osgi.command.function=hello"
         }
 )
-public class Activator implements HelloCommand {
+public class HelloCommandImpl implements HelloCommand {
         public void hello(){
                 System.out.println("Enter param");
+        }
+        public void hello(String... param){
+                System.out.println("Should be only 1 param");
         }
         @Override
         public void hello(String param){
