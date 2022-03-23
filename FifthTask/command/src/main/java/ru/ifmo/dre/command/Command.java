@@ -1,5 +1,6 @@
 package ru.ifmo.dre.command;
 
 public interface Command {
-    void stats();
+    String stats();
+    String stats(String name);
 }

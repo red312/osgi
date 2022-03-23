@@ -1,14 +1,11 @@
 package ru.ifmo.dre.command.impl;
 
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.component.annotations.ReferenceCardinality;
-import org.osgi.service.component.annotations.ReferencePolicy;
+import org.osgi.service.component.annotations.*;
 import ru.ifmo.dre.command.Command;
 import ru.ifmo.dre.service.NewsService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component(
         service = Command.class,
@@ -19,7 +16,7 @@ import java.util.List;
         }
 )
 public class NewsCommandImpl implements Command {
-    private List<NewsService> newsList;
+    private HashMap<String, NewsService> newsMap = new HashMap<>();
     @Reference(
             service = NewsService.class,
             cardinality = ReferenceCardinality.MULTIPLE,
@@ -28,30 +25,35 @@ public class NewsCommandImpl implements Command {
             unbind = "unbindService"
     )
     protected void bindService(NewsService newsService){
-        if (newsList == null) {
-            newsList = new ArrayList<>();
+        if (newsMap == null) {
+            newsMap = new HashMap<>();
         }
-        newsList.add(newsService);
+        newsMap.put(newsService.getName(), newsService);
     }
     protected void unbindService(NewsService newsService){
-        newsList.remove(newsService);
+        newsMap.remove(newsService.getName());
     }
-    public void stats(){
-        if (newsList == null || newsList.isEmpty() ){
-            System.out.println("News services not found!");
-            return;
+
+    @Override
+    public String stats(){
+        if (newsMap.isEmpty() ){
+            return "News services not found!";
         }
-        for (NewsService ns : newsList){
-            System.out.println(ns.getNewsName());
+        StringBuilder news = new StringBuilder();
+        for (Map.Entry<String, NewsService> ns : newsMap.entrySet()){
+            news.append(ns.getKey()).append(" ");
         }
+        return news.toString();
     }
-    public void stats(String name){
-        for (NewsService ns : newsList){
-            if (ns.getNewsName().equals(name)){
-                System.out.println(ns.getTopWords());
-                return;
-            }
-        }
-        System.out.println("Source not found!");
+
+    @Override
+    public String stats(String name){
+        if (newsMap.containsKey(name))
+            return String.valueOf(newsMap.get(name).getTopWords());
+        return "Source not found!";
+    }
+
+    public String stats(String... names){
+        return "Enter only one name";
     }
 }

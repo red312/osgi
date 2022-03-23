@@ -1,8 +1,9 @@
-package ru.ifmo.dre.aif;
+package ru.ifmo.dre.ria;
 
 import org.osgi.service.component.annotations.Component;
 import ru.ifmo.dre.service.AbstractNews;
 import ru.ifmo.dre.service.NewsService;
+
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -10,15 +11,15 @@ import java.net.URL;
 @Component(
         service = NewsService.class
 )
-public class AifService extends AbstractNews implements NewsService  {
+public class LentaService extends AbstractNews implements NewsService  {
 
     @Override
     public String getName() {
-        return "AIF";
+        return "Lenta";
     }
 
     @Override
     public URL getUrl() throws MalformedURLException {
-        return new URL("https://www.aif.ru/rss/news.php");
+        return new URL("https://api.lenta.ru/rss");
     }
 }

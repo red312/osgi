@@ -1,9 +1,11 @@
 package ru.ifmo.dre.service;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 public interface NewsService {
-    String getNewsName();
+    String getName();
     List<String> getTopWords();
-    List<String> getAllWords();
+    URL getUrl() throws MalformedURLException;
 }

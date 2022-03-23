@@ -8,24 +8,28 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>ru.ifmo.dre.service</artifactId>
-    <name>serviceOSGI5</name>
+    <artifactId>ru.ifmo.dre.ria</artifactId>
+    <name>riaOSGI5</name>
+    <packaging>bundle</packaging>
+    <version>1.0.0</version>
     <dependencies>
+        <dependency>
+            <groupId>ru.ifmo</groupId>
+            <artifactId>ru.ifmo.dre.service</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>com.rometools</groupId>
             <artifactId>rome</artifactId>
             <version>1.18.0</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
-    <packaging>bundle</packaging>
-    <version>1.0.0</version>
-
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -40,7 +44,7 @@
                         </Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Import-Package>org.osgi.framework, *</Import-Package>
+                        <Import-Package>*</Import-Package>
                         <Export-Package>${project.artifactId}</Export-Package>
                     </instructions>
                 </configuration>

@@ -13,6 +13,7 @@
         <module>command</module>
         <module>service</module>
         <module>aif</module>
+        <module>ria</module>
     </modules>
 
     <dependencies>
