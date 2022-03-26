@@ -15,6 +15,7 @@ import java.util.Map;
                 "osgi.command.function=stats"
         }
 )
+
 public class NewsCommandImpl implements Command {
     private HashMap<String, NewsService> newsMap = new HashMap<>();
     @Reference(
@@ -54,6 +55,6 @@ public class NewsCommandImpl implements Command {
     }
 
     public String stats(String... names){
-        return "Enter only one name";
+        return "Bad usage - enter only one news name";
     }
 }

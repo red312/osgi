@@ -8,4 +8,6 @@ public interface NewsService {
     String getName();
     List<String> getTopWords();
     URL getUrl() throws MalformedURLException;
+    int topWordsNumber();
 }
+

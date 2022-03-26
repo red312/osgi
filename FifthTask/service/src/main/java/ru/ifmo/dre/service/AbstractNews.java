@@ -17,10 +17,12 @@ import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 
 public abstract class AbstractNews implements NewsService{
-    abstract public String getName();
+    public abstract String getName();
     abstract public URL getUrl() throws MalformedURLException;
+    abstract public int topWordsNumber();
 
     public List<String> getTopWords(){
+        int wordsNumber = topWordsNumber();
         List<String> words = getAllWords();
         HashMap<String, Integer> topWords = new HashMap<>();
         for (String word : words) {
@@ -29,10 +31,11 @@ public abstract class AbstractNews implements NewsService{
         List<String> res = topWords.entrySet().stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .map(Map.Entry::getKey)
-                .limit(10).collect(Collectors.toList());
+                .filter(word -> word.length() > 2)
+                .limit(wordsNumber).collect(Collectors.toList());
         return res;
     }
-    public List<String> getAllWords() {
+    protected List<String> getAllWords() {
         List<String> res = new ArrayList<>();
         try {
             URL url = getUrl();
