@@ -1,4 +1,4 @@
-package ru.ifmo.dre.ria;
+package ru.ifmo.dre.FifthTask.aif;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -6,9 +6,8 @@ import org.osgi.service.metatype.annotations.AttributeDefinition;
 import org.osgi.service.metatype.annotations.AttributeType;
 import org.osgi.service.metatype.annotations.Designate;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
-import ru.ifmo.dre.service.AbstractNews;
-import ru.ifmo.dre.service.NewsService;
-
+import ru.ifmo.dre.FifthTask.service.AbstractNewsService;
+import ru.ifmo.dre.FifthTask.service.NewsService;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,20 +15,18 @@ import java.net.URL;
 @Component(
         service = NewsService.class
 )
-@Designate(ocd = RiaService.OSGIConfig.class)
-public class RiaService extends AbstractNews implements NewsService  {
-
+@Designate(ocd = AifService.OSGIConfig.class)
+public class AifService extends AbstractNewsService implements NewsService  {
     private String serviceURL;
     private int wordsNumber;
 
-    @ObjectClassDefinition(name="RIA", description="RIA service")
+    @ObjectClassDefinition(name="AIF", description="AIF service")
     public @interface OSGIConfig {
         @AttributeDefinition(
                 name = "URL",
                 description = "Enter URL",
                 type = AttributeType.STRING)
-        String serviceURL() default "https://ria.ru/export/rss2/archive/index.xml";
-
+        String serviceURL() default "https://www.aif.ru/rss/news.php";
 
         @AttributeDefinition(
                 name = "Top words number",
@@ -37,18 +34,21 @@ public class RiaService extends AbstractNews implements NewsService  {
                 type = AttributeType.INTEGER)
         int wordsNumber() default 10;
     }
+
     @Override
     public String getName() {
-        return "RIA";
+        return "AIF";
     }
+
 
     @Override
     public URL getUrl() throws MalformedURLException {
         return new URL(serviceURL);
+
     }
 
     @Override
-    public int topWordsNumber(){
+    public int topWordsNumber() {
         return wordsNumber;
     }
 
@@ -57,4 +57,5 @@ public class RiaService extends AbstractNews implements NewsService  {
         this.serviceURL = serviceConfig.serviceURL();
         this.wordsNumber = serviceConfig.wordsNumber();
     }
+
 }

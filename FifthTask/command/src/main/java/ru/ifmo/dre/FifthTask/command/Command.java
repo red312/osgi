@@ -1,4 +1,4 @@
-package ru.ifmo.dre.command;
+package ru.ifmo.dre.FifthTask.command;
 
 public interface Command {
     String stats();

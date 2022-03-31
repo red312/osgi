@@ -1,8 +1,8 @@
-package ru.ifmo.dre.command.impl;
+package ru.ifmo.dre.FifthTask.command.impl;
 
 import org.osgi.service.component.annotations.*;
-import ru.ifmo.dre.command.Command;
-import ru.ifmo.dre.service.NewsService;
+import ru.ifmo.dre.FifthTask.command.Command;
+import ru.ifmo.dre.FifthTask.service.NewsService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,8 +49,9 @@ public class NewsCommandImpl implements Command {
 
     @Override
     public String stats(String name){
-        if (newsMap.containsKey(name))
+        if (newsMap.containsKey(name)) {
             return String.valueOf(newsMap.get(name).getTopWords());
+        }
         return "Source not found!";
     }
 

@@ -1,4 +1,4 @@
-package ru.ifmo.dre.service;
+package ru.ifmo.dre.FifthTask.service;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -16,10 +16,8 @@ import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 
-public abstract class AbstractNews implements NewsService{
-    public abstract String getName();
-    abstract public URL getUrl() throws MalformedURLException;
-    abstract public int topWordsNumber();
+public abstract class AbstractNewsService implements NewsService{
+    private final int wordsLength = 2;
 
     public List<String> getTopWords(){
         int wordsNumber = topWordsNumber();
@@ -31,7 +29,7 @@ public abstract class AbstractNews implements NewsService{
         List<String> res = topWords.entrySet().stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .map(Map.Entry::getKey)
-                .filter(word -> word.length() > 2)
+                .filter(word -> word.length() > wordsLength)
                 .limit(wordsNumber).collect(Collectors.toList());
         return res;
     }
@@ -46,8 +44,12 @@ public abstract class AbstractNews implements NewsService{
                 res.addAll(Stream.of(entry.getTitle().split("[^A-Za-zА-Яа-я]+"))
                         .map(String::toLowerCase).toList());
             }
-        } catch (IOException | FeedException e) {
-            System.out.println("Something went wrong(");
+        } catch (FeedException e) {
+            System.err.println("Bad rss feed");
+        } catch (MalformedURLException e) {
+            System.err.println("Something wrong with url");
+        } catch (IOException e) {
+            System.err.println("Bad connection");
         }
         return res;
     }

@@ -4,18 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>FifthTask</artifactId>
-        <groupId>ru.ifmo</groupId>
+        <groupId>ru.ifmo.dre.FifthTask</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>ru.ifmo.dre.ria</artifactId>
+    <artifactId>ria</artifactId>
     <name>riaOSGI5</name>
     <packaging>bundle</packaging>
     <version>1.0.0</version>
     <dependencies>
         <dependency>
-            <groupId>ru.ifmo</groupId>
-            <artifactId>ru.ifmo.dre.service</artifactId>
+            <groupId>ru.ifmo.dre.FifthTask</groupId>
+            <artifactId>service</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
@@ -23,24 +23,6 @@
             <groupId>com.rometools</groupId>
             <artifactId>rome</artifactId>
             <version>1.18.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.8.2</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.wcm</groupId>
-            <artifactId>io.wcm.testing.aem-mock.junit5</artifactId>
-            <version>4.1.8</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.wcm</groupId>
-            <artifactId>io.wcm.testing.wcm-io-mock.caconfig</artifactId>
-            <version>1.2.0</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
     <properties>
@@ -58,12 +40,12 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>
-                            ${project.artifactId}
+                            ${project.groupId}.ria
                         </Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Import-Package>*</Import-Package>
-                        <Export-Package>${project.artifactId}</Export-Package>
+                        <Export-Package>${project.groupId}.ria</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>

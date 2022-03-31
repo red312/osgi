@@ -1,4 +1,4 @@
-package ru.ifmo.dre.service;
+package ru.ifmo.dre.FifthTask.service;
 
 import java.net.MalformedURLException;
 import java.net.URL;

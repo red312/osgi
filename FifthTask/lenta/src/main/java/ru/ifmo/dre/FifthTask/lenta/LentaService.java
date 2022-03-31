@@ -1,14 +1,14 @@
-package ru.ifmo.dre.aif;
+package ru.ifmo.dre.FifthTask.lenta;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.ConfigurationPolicy;
 import org.osgi.service.metatype.annotations.AttributeDefinition;
 import org.osgi.service.metatype.annotations.AttributeType;
 import org.osgi.service.metatype.annotations.Designate;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
-import ru.ifmo.dre.service.AbstractNews;
-import ru.ifmo.dre.service.NewsService;
+import ru.ifmo.dre.FifthTask.service.AbstractNewsService;
+import ru.ifmo.dre.FifthTask.service.NewsService;
+
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,17 +16,18 @@ import java.net.URL;
 @Component(
         service = NewsService.class
 )
-@Designate(ocd = AifService.OSGIConfig.class)
-public class AifService extends AbstractNews implements NewsService  {
+@Designate(ocd = LentaService.OSGIConfig.class)
+public class LentaService extends AbstractNewsService implements NewsService {
+    private String serviceURL;
+    private int wordsNumber;
 
-    @ObjectClassDefinition(name="AIF", description="AIF service")
+    @ObjectClassDefinition(name="Lenta", description="Lenta service")
     public @interface OSGIConfig {
         @AttributeDefinition(
                 name = "URL",
                 description = "Enter URL",
                 type = AttributeType.STRING)
-        String serviceURL() default "https://www.aif.ru/rss/news.php";
-
+        String serviceURL() default "https://api.lenta.ru/rss";
 
         @AttributeDefinition(
                 name = "Top words number",
@@ -35,23 +36,18 @@ public class AifService extends AbstractNews implements NewsService  {
         int wordsNumber() default 10;
     }
 
-    private String serviceURL;
-    private int wordsNumber;
-
-
     @Override
     public String getName() {
-        return "AIF";
+        return "Lenta";
     }
 
     @Override
     public URL getUrl() throws MalformedURLException {
         return new URL(serviceURL);
-
     }
 
     @Override
-    public int topWordsNumber() {
+    public int topWordsNumber(){
         return wordsNumber;
     }
 

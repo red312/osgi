@@ -4,18 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>FifthTask</artifactId>
-        <groupId>ru.ifmo</groupId>
+        <groupId>ru.ifmo.dre.FifthTask</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>ru.ifmo.dre.lenta</artifactId>
+    <artifactId>lenta</artifactId>
     <name>lentaOSGI5</name>
     <packaging>bundle</packaging>
     <version>1.0.0</version>
     <dependencies>
         <dependency>
-            <groupId>ru.ifmo</groupId>
-            <artifactId>ru.ifmo.dre.service</artifactId>
+            <groupId>ru.ifmo.dre.FifthTask</groupId>
+            <artifactId>service</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
@@ -40,12 +40,12 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>
-                            ${project.artifactId}
+                            ${project.groupId}.lenta
                         </Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Import-Package>*</Import-Package>
-                        <Export-Package>${project.artifactId}</Export-Package>
+                        <Export-Package>${project.groupId}.lenta</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
